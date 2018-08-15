@@ -53,13 +53,6 @@ class LinkedList:
       else:
         curr_node = curr_node.get_next()
 
-
-    # while not cur_node == None:
-      # if found value, return True
-      # update cur_node
-
-      #else return False
-
   def get_max(self):
     if self.head is None:
       return None
