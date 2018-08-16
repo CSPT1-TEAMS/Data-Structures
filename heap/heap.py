@@ -16,10 +16,10 @@ class Heap:
     return 2 * parentIndex + 1
 
   @staticmethod
-  def get_parent_index(childIndex):
-    # if childIndex >= 2:
-    #   return None
-    return math.floor(childIndex / 2)
+  def get_parent_index(child_index):
+    if child_index == 1:
+      return child_index
+    return math.floor(child_index / 2)
 
   def get_max(self):
     return self.storage[1]
@@ -47,12 +47,17 @@ class Heap:
   def _bubble_up(self, current_index):
     print('in bubble up, current_index:', current_index)
 
-
     parent_index = Heap.get_parent_index(current_index)
+    if current_index == parent_index:
+      return
+    
+    print('in bubble up, parent_index:', parent_index)
+
     parent = self.storage[parent_index]
     current = self.storage[current_index]
 
-    if parent is not None and current > parent:
+    #if parent is not None and current > parent:
+    if current > parent:
       self.storage[current_index], self.storage[parent_index] = parent, current
       self._bubble_up(parent_index)
 
@@ -76,3 +81,4 @@ test_heap.insert(17)
 test_heap.insert(35)
 test_heap.insert(4)
 test_heap.insert(29)
+
