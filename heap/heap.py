@@ -45,21 +45,18 @@ class Heap:
     self._sift_down(1)
 
   def _bubble_up(self, current_index):
-    if current_index <= 2:
-      parent_index = 1
-    else:
-      parent_index = Heap.get_parent_index(current_index)
+    print('in bubble up, current_index:', current_index)
 
+
+    parent_index = Heap.get_parent_index(current_index)
     parent = self.storage[parent_index]
     current = self.storage[current_index]
 
     if parent is not None and current > parent:
       self.storage[current_index], self.storage[parent_index] = parent, current
-      self._bubble_up(self.storage[parent_index])
+      self._bubble_up(parent_index)
 
   def _sift_down(self, index):
-    # if index < 1 return
-
     parent = self.storage(index)
     left = Heap.get_left_child_index(index)
     right = Heap.get_right_child_index(index)
@@ -73,4 +70,9 @@ class Heap:
 
 test_heap = Heap()
 test_heap.insert(100)
-
+test_heap.insert(19)
+test_heap.insert(21)
+test_heap.insert(17)
+test_heap.insert(35)
+test_heap.insert(4)
+test_heap.insert(29)
