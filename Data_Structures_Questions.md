@@ -40,9 +40,20 @@ For each of the methods associated with each data structure, classify it based o
 
 1. What is the runtime complexity of `insert`? 
 
+    *It would be O(log n), because to insert a value, it would be
+    greater than or less than the root. So therefore potentially cuts 1/4 or more 
+    of the tree with every comparison.
+
 2. What is the runtime complexity of `contains`?
 
-3. What is the runtime complexity of `get_max`? 
+    *It would also be O(log n), because when it runs comparison, it also cuts the tree down, because its either greater than or less than. Thereofre doesn't bother comparing unecessary values.
+
+3. What is the runtime complexity of `get_max`?
+
+    *It would also be O(log n) because since the tree is already ordered and sorted (assumed) then each comparison, cuts 
+    the amount of necessary comparison needed to find the biggest value.
+
+    P.S. All these answers are assuming the BST is ordered/ sorted. Otherwise worse case is O(n)
 
 ## Heap
 
