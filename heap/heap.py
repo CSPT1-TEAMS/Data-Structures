@@ -1,3 +1,5 @@
+import math
+
 class Heap:
   def __init__(self):
     # storage starts with an unused 0 to make 
@@ -5,20 +7,70 @@ class Heap:
     self.storage = [0]
     self.size = 0
 
-  def insert(self, value):
-    pass
+  @staticmethod
+  def get_left_child_index(parentIndex):
+    return 2 * parentIndex
 
-  def delete(self):
-    pass
+  @staticmethod
+  def get_right_child_index(parentIndex):
+    return 2 * parentIndex + 1
+
+  @staticmethod
+  def get_parent_index(childIndex):
+    # if childIndex >= 2:
+    #   return None
+    return math.floor(childIndex / 2)
 
   def get_max(self):
-    pass
+    return self.storage[1]
 
   def get_size(self):
-    pass
+    # is this correct?
+    return self.size
 
-  def _bubble_up(self, index):
-    pass
+  def insert(self, value):
+    # remove!
+    self.storage.append(value)
+
+    print('in insert, value:', value)
+    print('in insert, storage:', self.storage)
+
+    self.size += 1
+    self._bubble_up(self.size)
+
+  def delete(self):
+    removed = self.storage.pop(1)
+    self.size -= 1
+    self.storage.insert(1, self.storage.pop())
+    self._sift_down(1)
+
+  def _bubble_up(self, current_index):
+    if current_index <= 2:
+      parent_index = 1
+    else:
+      parent_index = Heap.get_parent_index(current_index)
+
+    parent = self.storage[parent_index]
+    current = self.storage[current_index]
+
+    if parent is not None and current > parent:
+      self.storage[current_index], self.storage[parent_index] = parent, current
+      self._bubble_up(self.storage[parent_index])
 
   def _sift_down(self, index):
-    pass
+    # if index < 1 return
+
+    parent = self.storage(index)
+    left = Heap.get_left_child_index(index)
+    right = Heap.get_right_child_index(index)
+    child = left if left > right else right
+    child_index = self.storage.index(child)
+
+    if parent < child:
+      self.storage[child_index], self.storage[index] = parent, child
+      self._sift_down(child_index)
+
+
+test_heap = Heap()
+test_heap.insert(100)
+
