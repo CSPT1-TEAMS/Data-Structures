@@ -17,6 +17,7 @@ class Heap:
 
   @staticmethod
   def get_parent_index(child_index):
+    # prevent replacing max value with 0 index (0)
     if child_index == 1:
       return child_index
     return math.floor(child_index / 2)
@@ -25,11 +26,9 @@ class Heap:
     return self.storage[1]
 
   def get_size(self):
-    # is this correct?
     return self.size
 
   def insert(self, value):
-    # remove!
     self.storage.append(value)
 
     print('in insert, value:', value)
@@ -48,17 +47,23 @@ class Heap:
     print('in bubble up, current_index:', current_index)
 
     parent_index = Heap.get_parent_index(current_index)
+    print('in bubble up, parent_index:', parent_index)
+
     if current_index == parent_index:
       return
     
-    print('in bubble up, parent_index:', parent_index)
 
     parent = self.storage[parent_index]
     current = self.storage[current_index]
+    print('in bubble up, parent:', parent)
+    print('in bubble up, child:', current)
 
     #if parent is not None and current > parent:
     if current > parent:
       self.storage[current_index], self.storage[parent_index] = parent, current
+
+      print('current > parent, storage:', self.storage)
+
       self._bubble_up(parent_index)
 
   def _sift_down(self, index):
@@ -75,10 +80,28 @@ class Heap:
 
 test_heap = Heap()
 test_heap.insert(100)
+
+print('\n')
+
 test_heap.insert(19)
+
+print('\n')
+
 test_heap.insert(21)
-test_heap.insert(17)
+
+print('\n')
+
+test_heap.insert(47)
+
+print('\n')
+
 test_heap.insert(35)
+
+print('\n')
+
 test_heap.insert(4)
+
+print('\n')
+
 test_heap.insert(29)
 
