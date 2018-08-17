@@ -16,9 +16,7 @@ class Heap:
     if self.size >= 1:
       deleted = self.storage.pop(1)
       self.storage.insert(1, self.storage[self.size-1])
-      # print('delete', deleted)
       self._sift_down(1)
-      # print('delete storage', self.storage)
       self.size -= 1
       return deleted
 
@@ -39,16 +37,13 @@ class Heap:
 
   def _sift_down(self, index):
     while (index * 2) < self.size:  # child < size
-      print('index', index)
       if self.storage[index] < self.storage[index * 2]:
         old_child = self.storage[index * 2]
-        print('old_child', old_child)
         self.storage[index * 2] = self.storage[index]
         self.storage[index] = old_child
 
       if self.storage[index] < self.storage[index * 2 + 1]:
         old_child = self.storage[index * 2 + 1]
-        print('old_child2', old_child)
         self.storage[index * 2 + 1] = self.storage[index]
         self.storage[index] = old_child
       index = index + 1
