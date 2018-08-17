@@ -52,10 +52,13 @@ class Heap:
       self.storage[current_index], self.storage[parent_index] = parent, current
       self._bubble_up(parent_index)
 
+    # Base case: If current is less than or equal to parent, we're done bubblin'.
+    return
+
   def _sift_down(self, index):
     size = self.get_size()
-    # Base case:
-    # This check avoids an edge case where the test tries to delete 0 from [0]
+    # Base case: This check avoids an edge case
+    # where someone might try to delete from an empty heap:
     if(size == 0):
       return
 
@@ -63,7 +66,9 @@ class Heap:
     left_index = Heap.get_left_child_index(index)
     right_index = Heap.get_right_child_index(index)
 
-    # Test to make sure left index isn't out of range:
+    # Test to make sure left index isn't out of range;
+    # if it is, assign it to negative Infinity so it never bubbles up,
+    # and the heap works with any negative number:
     if left_index <= size:
       left = self.storage[left_index]
     else:
@@ -80,13 +85,14 @@ class Heap:
     if math.isinf(left) and math.isinf(right):
       return
 
+    # Choose the greater of left and right and assign to child:
     child = left if left > right else right
     child_index = self.storage.index(child)
 
     if parent < child:
       self.storage[child_index], self.storage[index] = parent, child
       self._sift_down(child_index)
-    else:
-      # Base case: If parent is greater than child, out heap is balanced.
-      return
+
+    # Base case: If parent is greater than child, we're done siftin'.
+    return
 
