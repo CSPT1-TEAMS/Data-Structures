@@ -69,6 +69,10 @@ class Heap:
       self._bubble_up(parent_index)
 
   def _sift_down(self, index):
+    size = self.get_size()
+    if(size == 0):
+      print('no storage left, bailing. storage:', self.storage)
+      return
 
     print('\n')
     print('in sift_down, index:', index)
@@ -79,7 +83,6 @@ class Heap:
 
     left_index = Heap.get_left_child_index(index)
     right_index = Heap.get_right_child_index(index)
-    size = self.get_size()
 
     print('in sift_down, left child index is:', left_index)
     print('in sift_down, right child index is:', right_index)
