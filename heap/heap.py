@@ -8,11 +8,11 @@ class Heap:
     self.size = 0
 
   @staticmethod
-  def get_left_child_index(parentIndex):
+  def get_left_index(parentIndex):
     return 2 * parentIndex
 
   @staticmethod
-  def get_right_child_index(parentIndex):
+  def get_right_index(parentIndex):
     return 2 * parentIndex + 1
 
   @staticmethod
@@ -54,7 +54,7 @@ class Heap:
 
     # Base case: If current is less than or equal to parent, we're done bubblin'.
     return
-
+    
   def _sift_down(self, index):
     size = self.get_size()
     # Base case: This check avoids an edge case
@@ -63,8 +63,8 @@ class Heap:
       return
 
     parent = self.storage[index]
-    left_index = Heap.get_left_child_index(index)
-    right_index = Heap.get_right_child_index(index)
+    left_index = Heap.get_left_index(index)
+    right_index = Heap.get_right_index(index)
 
     # Test to make sure left index isn't out of range;
     # if it is, assign it to negative Infinity so it never bubbles up,
@@ -95,4 +95,30 @@ class Heap:
 
     # Base case: If parent is greater than child, we're done siftin'.
     return
+
+
+'''
+# Working on an alternate version:
+
+    l = Heap.get_left_index(index)
+    r = Heap.get_right_index(index)
+    parent = self.storage[index]
+
+    if l > self.size and r > self.size:
+      return
+
+    # check if left out of bound, then if right here?
+    if r > self.size:
+      child = l
+
+    else:
+      child = l if self.storage[l] > self.storage[r] else r
+
+    if parent < child:
+      self.storage[l], self.storage[r] = self.storage[r], self.storage[l]
+      self._sift_down(child)
+
+    return
+
+'''
 
