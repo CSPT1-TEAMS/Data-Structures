@@ -9,42 +9,47 @@ class Heap:
 
   def insert(self, value):
     self.storage.append(value)
-    print('value', value)
     self._bubble_up(self.size + 1)
     self.size += 1
 
   def delete(self):
-    pass
+    if self.size >= 1:
+      deleted = self.storage.pop(1)
+      self.storage.insert(1, self.storage[self.size-1])
+      # print('delete', deleted)
+      self._sift_down(1)
+      # print('delete storage', self.storage)
+      self.size -= 1
+      return deleted
 
   def get_max(self):
     return self.storage[1]
 
   def get_size(self):
-    # return self.size
-    pass
+    return self.size
 
   def _bubble_up(self, index):
-    print('index//2', index//2)
-    print('len', len(self.storage))
-    print('storage', self.storage)
-    if self.storage[index] < self.storage[ (index//2) ]:
-      return
-    else: #child > parent
-      old_parent = self.storage[(index//2)]
-      new_parent = self.storage[index]
-      print('old_parent', old_parent)
-      self.storage[(index//2)] = new_parent
-      self.storage[index] = old_parent
-      # self.storage.append(old_parent)
-      # self._bubble_up(-1)
-      # self.storage[index] = self._sift_down(index)
-      
-      print('new parent', self.storage[(index//2)])
-
-      # self._bubble_up(self.storage[(index//2)])
-      print('storage2', self.storage)
-      return
+    while (index // 2) > 0:  # parent index > 0
+      if self.storage[index] > self.storage[index // 2]:  # child > parent
+        temp = self.storage[index//2]  # temp = parent
+        self.storage[index // 2] = self.storage[index]  # parent = child
+        self.storage[index] = temp  # child = parent
+      index = index // 2  # go up one level
+    return
 
   def _sift_down(self, index):
-    # if self.storage[index] > self.storage[(index//2)]:
+    while (index * 2) < self.size:  # child < size
+      print('index', index)
+      if self.storage[index] < self.storage[index * 2]:
+        old_child = self.storage[index * 2]
+        print('old_child', old_child)
+        self.storage[index * 2] = self.storage[index]
+        self.storage[index] = old_child
+
+      if self.storage[index] < self.storage[index * 2 + 1]:
+        old_child = self.storage[index * 2 + 1]
+        print('old_child2', old_child)
+        self.storage[index * 2 + 1] = self.storage[index]
+        self.storage[index] = old_child
+      index = index + 1
     pass
