@@ -5,10 +5,11 @@ class ListNode:
     self.next = next
 
   def insert_after(self, value):
-    pass
-
+    self.next = value
+    
   def insert_before(self, value):
-    pass
+    new_node = value
+    self.tail.next = new_node
 
   def delete(self):
     pass
@@ -20,9 +21,18 @@ class DoublyLinkedList:
 
   def add_to_head(self, value):
     # create new_node
-
+    new_node = ListNode( value )
     #if head DNE, head & tail = new_node
     #add to head or remove from the tail
+    if self.head is None:
+      self.head = new_node
+      self.tail = new_node
+    else:
+      self.tail.next = new_node
+      self.prev = self.tail
+      self.tail = new_node
+
+    return
 
     # else
       # head.prev = new_node
