@@ -51,10 +51,16 @@ class LinkedList:
       if current.get_value() == value:
         return True
       current = current.get_next()
-    # Explicitly return false if while loop finishes
     return False
 
   def get_max(self):
-    pass
-
+    if self.head is None:
+      return None
+    max = self.head.get_value()
+    current = self.head.get_next()
+    while current:
+      if current.get_value() > max:
+        max = current.get_value()
+      current = current.get_next()
+    return max
 
